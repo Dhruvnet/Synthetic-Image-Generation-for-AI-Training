@@ -1,116 +1,69 @@
-# 🔬 Synthetic Image Generation for AI Training
+# Weather-Aware Image Translation Pipeline
 
-This project focuses on **synthetic image generation** to enhance AI training by creating high-quality and diverse visual data. The model improves robustness in dynamic environments such as **surveillance systems**, **autonomous vehicles**, and **weather condition simulations**. We also integrate cybersecurity safeguards to protect against **adversarial attacks**, **deepfakes**, and **privacy threats**.
+An end-to-end image generation system that performs domain translation between various weather and time-of-day conditions using CycleGAN and super-resolution enhancement with SR3GAN. The model is trained on a custom dataset of over 89,000 images, including augmented variants, and evaluated on multiple loss metrics.
+ 
+ ![Status](https://img.shields.io/badge/demo-inactive-red)
+ 
+## Overview
 
----
+This project enables realistic image-to-image translation under different environmental conditions such as:
 
-## 🧠 Problem Definition
+- **Day ↔ Night**
+- **Clear ↔ Foggy / Rainy / Snowy**
+- Resolution enhancement using **SR3GAN**
 
-> Existing AI models struggle with real-world inconsistencies and lack diverse datasets.  
-Our goal is to develop a **robust, scalable, and high-resolution synthetic image generation pipeline** that supports:
-- Multi-object environments
-- High content preservation
-- Dynamic scene transitions
+The system is modular and can be adapted to other image translation tasks with appropriate datasets.
 
----
+## Features
 
-## 🎯 Objectives
+- CycleGAN-based translation for **day/night** and **weather condition** simulation.
+- SR3GAN-based **super-resolution upscaling** for enhanced image quality.
+- Custom dataset of **89K+ images**, generated through augmentation and manual curation.
+- Evaluation using:
+  - **Reconstruction Loss**: 0.565
+  - **Latent Loss**: 0.053
+- Demo visualization setup using **Gardio** (lightweight frontend prototype).
 
-- ✔️ Realistic day-to-night image translation using **CycleGAN**
-- ✔️ Simulating weather conditions like fog, rain, and snow with **Conditional Variational Autoencoder (CVAE)**
-- ✔️ Resolution enhancement using **Real-ESRGAN**
-- ✔️ Maintain object consistency and transition realism
-- ✔️ Include user-controlled environmental customization
+## Model Architecture
 
----
+- **CycleGAN**: Used for image domain translation.
+- **SR3GAN**: Applied as a post-processing step for super-resolution enhancement.
 
-## 🧪 Research Gaps
+## Dataset
 
-- ❌ Lack of output diversity (e.g., only one-to-one image translation)
-- ❌ Low-resolution or blurry image outputs
-- ❌ Dependence on paired datasets
-- ❌ Limited versatility in real-time applications
+- Total images: 89,000+
+- Sources: Open datasets + self-generated image augmentations (fog, rain, snow overlays, day/night filters).
+- Split: 80% training / 20% validation
 
----
+## Results
 
-## 🔧 Architecture
+| Metric              | Value   |
+|---------------------|---------|
+| Reconstruction Loss | 0.565   |
+| Latent Loss         | 0.053   |
 
+Qualitative results show effective transformation across both weather and lighting domains with perceptual consistency.
 
-![FINAL INCREASE SIZE](https://github.com/user-attachments/assets/e4877971-2318-4b0d-abe6-ac805cbe581e)
+## Demo
 
+A simple interactive interface was built using **Gardio** to visualize input-output transformations and test the model with custom images. 
+> **Note:** The Gradio demo is currently **inactive**.
 
-**Core Modules:**
-- `CycleGAN` – for day ↔ night transformations  
-- `CVAE` – for weather simulation (rain, fog, snow)  
-- `Real-ESRGAN` – for super-resolution  
-- `User Interface` – to control intensity and parameters for custom dataset creation
+## Installation
 
----
+```bash
+git clone https://github.com/your-username/weather-image-translation.git
+cd weather-image-translation
+# Install dependencies
+pip install -r requirements.txt
+```
 
-## 📈 Algorithm Flow
+## Outputs 
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/630d5c2a-8ac1-4cba-b0d8-482e884d0d2c" width="300" height="200" />
-  <img src="https://github.com/user-attachments/assets/6da6c4d9-6030-450e-8598-41f708def5f1" width="300" height="200" />
-  <img src="https://github.com/user-attachments/assets/08c98ec3-3652-46c2-9a35-087f6273beb8" width="300" height="200" />
-</p>
-
-
----
-
-## 🗃️ Dataset Details
-
-- **CycleGAN Dataset**: ~30,000 images  
-- **CVAE Attributes Dataset**: ~89,000 images  
-
----
-
-## 📊 Evaluation Metrics
-
-| Metric               | DALL-E 2 | RunwayML | Artbreeder | Our Model |
-|----------------------|----------|----------|------------|-----------|
-| Reconstruction Loss  | 0.745    | 0.720    | 0.760      | 0.565   |
-| Total Loss           | 0.755    | 0.740    | 0.770      | 0.580   |
-| Latent Loss          | 0.009    | 0.115    | 0.130      | 0.053   |
-
-### 📌 Hypothesis Testing
-- ✅ Null Hypothesis Rejected
-- 📉 Achieved target thresholds
-- 🎯 Results confirm high-quality and stable outputs
-
----
-
-## 🔄 Day ↔ Night & Weather Transformations Output 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/47787f01-2586-4c24-8c5a-ef2486e9b70e" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/f6540f70-c30d-4689-b827-9af88da3f438" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/bb4a79f4-e51f-42ac-b965-2776ead8d40c" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/7115f38b-c602-4f12-9633-59af03f6d2a7" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/6b3b8637-1954-4ae3-9990-b6284c91a179" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/ca25189c-0311-4d7c-ad4f-7b13b30ce050" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/9410f235-bdc5-4109-a1aa-45d8c93cd1f4" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/05a6cf0e-31d8-43cf-8e58-14784370b23a" width="400" height="150" />
-  <img src="https://github.com/user-attachments/assets/1a058081-1574-45a2-a026-f5c6d61e55d7" width="400" height="150" />
-</p>
-
----
-
-## 🔮 Future Work
-
-1. **Train on larger, diverse datasets**  
-2. **Real-time optimization for inference**  
-3. **User-guided sketch-based synthesis tool**
-
----
-
-## 🧪 Tech Stack
-
-- Python (PyTorch, TensorFlow)
-- OpenCV
-- Real-ESRGAN
-- CycleGAN
-- CVAE
-- Matplotlib & Seaborn for Evaluation
-- Jupyter Notebook
-
----
+![NIGHT-DAY IMG 2](https://github.com/user-attachments/assets/785119ee-610b-41f0-ab20-6476ac02242e)
+![NIGHT-DAY IMG 1](https://github.com/user-attachments/assets/5c4adedc-dfcf-4a2a-b519-8e9d0c453035)
+![DAY-NIGHT IMG 2](https://github.com/user-attachments/assets/314fb098-2549-4de9-ac34-b1e1e218f326)
+![DAY-NIGHT IMG 1](https://github.com/user-attachments/assets/cbeca322-dafa-44cf-9a7e-981d79a75f20)
+![CLEAR-RAINY IMG 1](https://github.com/user-attachments/assets/d07538d8-2f11-4ab2-8567-c49d85337086)
+![RAINY-CLEAR IMG 1](https://github.com/user-attachments/assets/18006331-f6ca-4051-b1ca-e96230ee0ec2)
+![NORMAL-HEAVY-FOG](https://github.com/user-attachments/assets/e8c032d4-df89-40b8-8c66-580729470dc9)
